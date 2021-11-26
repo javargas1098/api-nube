@@ -4,12 +4,14 @@ import subprocess as sp
 from celery import Celery
 from celery.signals import task_postrun
 from flask import current_app,Flask
-from ..modelos import Task, TaskSchema,db
+from .modelos import Task, TaskSchema,db
 import requests
 
-celery = Celery(__name__)
-celery.conf.update(BROKER_URL=os.environ['REDIS_URL'],
-                CELERY_RESULT_BACKEND=os.environ['REDIS_URL'])
+broker = os.environ['REDIS_URL']
+backend = os.environ['REDIS_URL']
+celery  = Celery(__name__, broker=broker,
+                backend=backend)
+
 # celery.conf.broker_url = os.environ.get("CELERY_BROKER_URL", 'redis://default:mMpGhm5ioQWLoqgSVFLaKYf5X4gefrRd@redis-11258.c261.us-east-1-4.ec2.cloud.redislabs.com:11258')
 # celery.conf.result_backend = os.environ.get("CELERY_RESULT_BACKEND",  'redis://default:mMpGhm5ioQWLoqgSVFLaKYf5X4gefrRd@redis-11258.c261.us-east-1-4.ec2.cloud.redislabs.com:11258')
 
