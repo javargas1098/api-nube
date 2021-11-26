@@ -19,7 +19,7 @@ celery.conf.broker_pool_limit = 0
 
 def create_app(config_name):
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = "postgres://ipigpykpndprpi:89d9b3038afd98bacd2750e5c75de161df88c9f7a6cc19647b93875ee88304db@ec2-44-198-196-149.compute-1.amazonaws.com:5432/d5p22op6k4gur1"
+    app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://ruxgatsybvdqdm:15646d69ee12108cbf4e31f2bcc4e07114d4252d2a007a661b01508b1f34b228@ec2-44-199-85-33.compute-1.amazonaws.com:5432/dec0l5i7soa43p"
     app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
     app.config['JWT_SECRET_KEY']='frase-secreta'
     app.config['PROPAGATE_EXCEPTIONS'] = True
