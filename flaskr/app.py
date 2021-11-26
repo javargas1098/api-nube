@@ -5,8 +5,8 @@ from flask_restful import Api
 
 # from flaskr import create_app
 
-from modelos import db
-from vistas import VistaSignIn, VistaLogIn, VistaTasks, VistaTaskDetail, VistaFileDetail,VistaTest
+from .modelos import db
+from .vistas import VistaSignIn, VistaLogIn, VistaTasks, VistaTaskDetail, VistaFileDetail,VistaTest
 UPLOAD_FOLDER = 'uploaded'
 DOWNLOAD_FOLDER = 'download'
 
