@@ -8,8 +8,8 @@ from modelos import Task, TaskSchema,db
 import requests
 
 celery = Celery(__name__)
-celery.conf.broker_url = os.environ.get("CELERY_BROKER_URL", 'redis://redis:6379/0')
-celery.conf.result_backend = os.environ.get("CELERY_RESULT_BACKEND",  'redis://redis:6379/0')
+celery.conf.broker_url = os.environ.get("REDISCLOUD_URL", 'redis://redis:6379/0')
+celery.conf.result_backend = os.environ.get("REDISCLOUD_URL",  'redis://redis:6379/0')
 celery.conf.broker_pool_limit = 0
 
 def create_app(config_name):
