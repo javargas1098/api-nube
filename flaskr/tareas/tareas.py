@@ -4,7 +4,7 @@ import subprocess as sp
 from celery import Celery
 from celery.signals import task_postrun
 from flask import current_app,Flask
-from .modelos import Task, TaskSchema,db
+from ..modelos import Task, TaskSchema,db
 import requests
 
 broker = os.environ['REDIS_URL']
