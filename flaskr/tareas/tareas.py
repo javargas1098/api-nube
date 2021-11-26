@@ -8,8 +8,11 @@ from ..modelos import Task, TaskSchema,db
 import requests
 
 celery = Celery(__name__)
-celery.conf.broker_url = os.environ.get("REDISCLOUD_URL", 'redis://default:mMpGhm5ioQWLoqgSVFLaKYf5X4gefrRd@redis-11258.c261.us-east-1-4.ec2.cloud.redislabs.com:11258')
-celery.conf.result_backend = os.environ.get("REDISCLOUD_URL",  'redis://default:mMpGhm5ioQWLoqgSVFLaKYf5X4gefrRd@redis-11258.c261.us-east-1-4.ec2.cloud.redislabs.com:11258')
+celery.conf.update(BROKER_URL=os.environ['REDIS_URL'],
+                CELERY_RESULT_BACKEND=os.environ['REDIS_URL'])
+# celery.conf.broker_url = os.environ.get("CELERY_BROKER_URL", 'redis://default:mMpGhm5ioQWLoqgSVFLaKYf5X4gefrRd@redis-11258.c261.us-east-1-4.ec2.cloud.redislabs.com:11258')
+# celery.conf.result_backend = os.environ.get("CELERY_RESULT_BACKEND",  'redis://default:mMpGhm5ioQWLoqgSVFLaKYf5X4gefrRd@redis-11258.c261.us-east-1-4.ec2.cloud.redislabs.com:11258')
+
 celery.conf.broker_pool_limit = 0
 
 def create_app(config_name):
