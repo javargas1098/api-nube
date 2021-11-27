@@ -6,6 +6,7 @@ from celery.signals import task_postrun
 from flask import current_app,Flask
 from ..modelos import Task, TaskSchema,db
 import requests
+import io
 
 broker = os.environ['REDIS_URL']
 backend = os.environ['REDIS_URL']
@@ -51,9 +52,11 @@ def file_save(request_json):
         values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
         # file = open(output, "rb")
         print(filename)
-        file = requests.get(URL_ARCHIVOS+'/upload/'+filename) 
-        sendFile = {"file": file}
-        # print(sendFile)
+        # file = requests.get(URL_ARCHIVOS+'/upload/'+filename)
+        content = requests.get(URL_ARCHIVOS+'/upload/' + filename, stream=True,verify=False) 
+        sendFile = {"file": (io.BytesIO(content.content))}
+        # sendFile = {"file": file}
+        print(sendFile)
         content = requests.post(urlFile+'/files',files=sendFile, data=values,verify=False)
         print(content)
         print("2******")

@@ -78,7 +78,7 @@ class VistaTasks(Resource):
         dfile = '{}.{}'.format(os.path.splitext(filename)[
                                     0] + str(uuidSelected), str(format))  # Build file name
         outputF = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], dfile)
-        sendFile = {"file": (dfile, file.stream, file.mimetype)}
+        sendFile = {"file": (file.filename, file.stream, file.mimetype)}
         # sendFile = {"file": file}
         print(sendFile)
         cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile) 
@@ -89,7 +89,7 @@ class VistaTasks(Resource):
             'urlFile':URL_CONVERSOR,
             'outputF':outputF,
             'inputF':inputF,
-            'filename':filename,
+            'filename':file.filename,
             'dfile':dfile,
             'format': request.form.get("newFormat"),
             'creation_date': str(int(time.time())),
