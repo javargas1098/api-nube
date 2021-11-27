@@ -50,8 +50,9 @@ def file_save(request_json):
         taskId = task_schema.dump(new_task)['id']
         values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
         # file = open(output, "rb")
+        print(filename)
         file = requests.get(URL_ARCHIVOS+'/upload/'+filename) 
-        sendFile = {"file": file.content}
+        sendFile = {"file": file}
         # print(sendFile)
         content = requests.post(urlFile+'/files',files=sendFile, data=values,verify=False)
         print(content)
