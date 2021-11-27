@@ -16,7 +16,7 @@ user_schema = UserSchema()
 task_schema = TaskSchema()
 
 URL_CONVERSOR = "https://app-conversor-grupo5.herokuapp.com"
-URL_ARCHIVOS = "http://ec2-3-224-135-28.compute-1.amazonaws.com"
+URL_ARCHIVOS = "ec2-34-233-71-0.compute-1.amazonaws.com"
 
 
 class VistaSignIn(Resource):
