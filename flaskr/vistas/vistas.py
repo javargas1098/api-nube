@@ -15,6 +15,8 @@ from werkzeug.utils import secure_filename
 user_schema = UserSchema()
 task_schema = TaskSchema()
 
+URL_CONVERSOR = "https://app-conversor-grupo5.herokuapp.com"
+
 
 class VistaSignIn(Resource):
 
@@ -71,10 +73,10 @@ class VistaTasks(Resource):
         dfile = '{}.{}'.format(os.path.splitext(filename)[
                                     0] + str(uuidSelected), str(format))  # Build file name
         outputF = os.path.join(os.path.dirname(__file__).replace("vistas", "") + current_app.config['DOWNLOAD_FOLDER'], dfile)
-        inputF  = os.getenv('URL_CONVERSOR')+'/files/'
+        inputF  = URL_CONVERSOR+'/files/'
         json = {
             'output':output,
-            'urlFile':os.getenv('URL_CONVERSOR'),
+            'urlFile':URL_CONVERSOR,
             'outputF':outputF,
             'inputF':inputF,
             'filename':filename,
@@ -105,9 +107,9 @@ class VistaTaskDetail(Resource):
         task.status = "UPLOADED"
         task.dateUp = datetime.datetime.now()
         db.session.commit()
-        requests.put(os.getenv('URL_CONVERSOR') +'/update-files',
+        requests.put(URL_CONVERSOR +'/update-files',
                                json={'name': taskJson['name'], 'status': taskJson['status']['llave'], 'taskId': task_id,
-                                     'nameFormat': taskJson['nameFormat'], 'newFormat': request.form.get('newFormat')})
+                                     'nameFormat': taskJson['nameFormat'], 'newFormat': request.form.get('newFormat')},verify=False)
         return "Task updated", 200
        
 
@@ -116,8 +118,8 @@ class VistaTaskDetail(Resource):
         task = Task.query.get_or_404(task_id)
         taskJson = json.loads(json.dumps(task_schema.dump(task), default=myConverter))
 
-        requests.delete(os.getenv('URL_CONVERSOR')+'/delete-files',
-                                  json={'name': taskJson['name'], 'nameFormat': taskJson['nameFormat']})
+        requests.delete(URL_CONVERSOR+'/delete-files',
+                                  json={'name': taskJson['name'], 'nameFormat': taskJson['nameFormat']},verify=False)
         db.session.delete(task)
         db.session.commit()
         return "Task deleted", 200
@@ -128,7 +130,7 @@ class VistaFileDetail(Resource):
 
     @jwt_required()
     def get(self, file_name):
-        content = requests.get(os.getenv('URL_CONVERSOR')+'/get-files/' + file_name, stream=True)
+        content = requests.get(URL_CONVERSOR+'/get-files/' + file_name, stream=True,verify=False)
         return send_file(io.BytesIO(content.content), as_attachment=True, attachment_filename=file_name)
 
 
