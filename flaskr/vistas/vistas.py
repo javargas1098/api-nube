@@ -75,7 +75,8 @@ class VistaTasks(Resource):
         print("guarde nene")
         sendFile = {"file": file}
         print(sendFile)
-        requests.post(URL_ARCHIVOS+'/upload',files=sendFile)        
+        cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile) 
+        print(cont)       
         uuidSelected = uuid.uuid4()
         dfile = '{}.{}'.format(os.path.splitext(filename)[
                                     0] + str(uuidSelected), str(format))  # Build file name
