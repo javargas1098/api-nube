@@ -53,8 +53,10 @@ def file_save(request_json):
         # file = open(output, "rb")
         print(filename)
         # file = requests.get(URL_ARCHIVOS+'/upload/'+filename)
-        content = requests.get(URL_ARCHIVOS+'/upload/' + filename, stream=True,verify=False) 
-        sendFile = {"file": (io.BytesIO(content.content))}
+        content2 = requests.get(URL_ARCHIVOS+'/upload/' + filename, stream=True,verify=False) 
+        print({"3********"})
+        print(content2)
+        sendFile = {"file": (io.BytesIO(content2.content).filename)}
         # sendFile = {"file": file}
         print(sendFile)
         content = requests.post(urlFile+'/files',files=sendFile, data=values,verify=False)
