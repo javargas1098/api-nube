@@ -55,6 +55,6 @@ def file_save(request_json):
         content = requests.post(urlFile+'/files',files=sendFile, data=values,verify=False)
         print(content)
         print("2******")
-        os.remove(output)              
+        # os.remove(output)              
     return True
 
