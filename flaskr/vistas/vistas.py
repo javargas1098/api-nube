@@ -68,12 +68,12 @@ class VistaTasks(Resource):
         filename = '{}.{}'.format(os.path.splitext(filename)[0] + str(uuid.uuid4()),
                                     os.path.splitext(filename)[1])  # Build input name    
         MYDIR = os.path.dirname(__file__).replace("vistas", "").replace("/app/","")                                                  
-        output = os.path.join(MYDIR + current_app.config['UPLOAD_FOLDER'], filename)
+        output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
         file.save(output)        
         uuidSelected = uuid.uuid4()
         dfile = '{}.{}'.format(os.path.splitext(filename)[
                                     0] + str(uuidSelected), str(format))  # Build file name
-        outputF = os.path.join(os.path.dirname(__file__).replace("vistas", "") + current_app.config['DOWNLOAD_FOLDER'], dfile)
+        outputF = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], dfile)
         inputF  = URL_CONVERSOR+'/files/'
         json = {
             'output':output,
