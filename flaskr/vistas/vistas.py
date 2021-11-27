@@ -16,6 +16,7 @@ user_schema = UserSchema()
 task_schema = TaskSchema()
 
 URL_CONVERSOR = "https://app-conversor-grupo5.herokuapp.com"
+URL_ARCHIVOS = "http://ec2-3-224-135-28.compute-1.amazonaws.com"
 
 
 class VistaSignIn(Resource):
@@ -71,7 +72,9 @@ class VistaTasks(Resource):
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
         file.save(output) 
         print(output)
-        print("guarde nene")       
+        print("guarde nene")
+        sendFile = {"file": file}
+        requests.post(URL_ARCHIVOS+'/upload',files=sendFile)        
         uuidSelected = uuid.uuid4()
         dfile = '{}.{}'.format(os.path.splitext(filename)[
                                     0] + str(uuidSelected), str(format))  # Build file name

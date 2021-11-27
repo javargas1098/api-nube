@@ -9,6 +9,7 @@ import requests
 
 broker = os.environ['REDIS_URL']
 backend = os.environ['REDIS_URL']
+URL_ARCHIVOS = "http://ec2-3-224-135-28.compute-1.amazonaws.com"
 celery  = Celery(__name__, broker=broker,
                 backend=backend)
 
@@ -48,7 +49,8 @@ def file_save(request_json):
         task_schema = TaskSchema()
         taskId = task_schema.dump(new_task)['id']
         values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
-        file = open(output, "rb")
+        # file = open(output, "rb")
+        file = requests.get(URL_ARCHIVOS+'/upload/'+filename) 
         sendFile = {"file": file}
         content = requests.post(urlFile+'/files',files=sendFile, data=values,verify=False)
         print(content)
