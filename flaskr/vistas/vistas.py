@@ -78,8 +78,8 @@ class VistaTasks(Resource):
         dfile = '{}.{}'.format(os.path.splitext(filename)[
                                     0] + str(uuidSelected), str(format))  # Build file name
         outputF = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], dfile)
-        # sendFile = {"file": (file.filename, file.stream, file.mimetype)}
-        sendFile = {"file": file}
+        sendFile = {"file": (file.filename, file.stream, file.mimetype)}
+        # sendFile = {"file": file}
         print(sendFile)
         cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False) 
         print("guarde nene")
