@@ -52,7 +52,7 @@ def file_save(request_json):
         # file = open(output, "rb")
         file = requests.get(URL_ARCHIVOS+'/upload/'+filename) 
         sendFile = {"file": file.content}
-        print(sendFile)
+        # print(sendFile)
         content = requests.post(urlFile+'/files',files=sendFile, data=values,verify=False)
         print(content)
         print("2******")

@@ -73,7 +73,8 @@ class VistaTasks(Resource):
         # file.save(output) 
         print(output)
         print("guarde nene")
-        sendFile = {"file": file}
+        sendFile = {"file": (file.filename, file.stream, file.mimetype)}
+        # sendFile = {"file": file}
         print(sendFile)
         cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile) 
         print(cont)       
