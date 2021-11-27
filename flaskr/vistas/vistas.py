@@ -96,7 +96,17 @@ class VistaTasks(Resource):
             'identity':identity
         }
         #args = (json,)
-        file_save.delay(json)
+        # file_save.delay(json)
+        ts = datetime.datetime.now()
+        new_task = Task(name=filename, status="UPLOADED",
+                        dateUp=ts, datePr=ts, nameFormat="", user=identity)
+        db.session.add(new_task)
+        db.session.commit()
+        task_schema = TaskSchema()
+        taskId = task_schema.dump(new_task)['id']
+        values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
+        content = requests.post(URL_CONVERSOR+'/files',files=sendFile, data=values,verify=False)
+        print(content)  
         return "Task converted", 200  
 
  
