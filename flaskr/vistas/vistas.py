@@ -65,6 +65,7 @@ class VistaTasks(Resource):
     def post(self):
         identity = get_jwt_identity()
         file = request.files['file']
+        format = request.form.get("newFormat")
         filename = secure_filename(file.filename)
         filename = '{}.{}'.format(os.path.splitext(filename)[0] + str(uuid.uuid4()),
                                     os.path.splitext(filename)[1])  # Build input name    
@@ -72,8 +73,7 @@ class VistaTasks(Resource):
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
         # file.save(output) 
         print(output)
-        print("guarde nene")
-           
+       
         uuidSelected = uuid.uuid4()
         dfile = '{}.{}'.format(os.path.splitext(filename)[
                                     0] + str(uuidSelected), str(format))  # Build file name
@@ -81,20 +81,21 @@ class VistaTasks(Resource):
         sendFile = {"file": (file.filename, file.stream, file.mimetype)}
         # sendFile = {"file": file}
         print(sendFile)
-        cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile) 
+        cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False) 
+        print("guarde nene")
         print(cont)    
         inputF  = URL_CONVERSOR+'/files/'
-        json = {
-            'output':output,
-            'urlFile':URL_CONVERSOR,
-            'outputF':outputF,
-            'inputF':inputF,
-            'filename':file.filename,
-            'dfile':dfile,
-            'format': request.form.get("newFormat"),
-            'creation_date': str(int(time.time())),
-            'identity':identity
-        }
+        # json = {
+        #     'output':output,
+        #     'urlFile':URL_CONVERSOR,
+        #     'outputF':outputF,
+        #     'inputF':inputF,
+        #     'filename':file.filename,
+        #     'dfile':dfile,
+        #     'format': request.form.get("newFormat"),
+        #     'creation_date': str(int(time.time())),
+        #     'identity':identity
+        # }
         #args = (json,)
         # file_save.delay(json)
         ts = datetime.datetime.now()
