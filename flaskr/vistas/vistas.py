@@ -77,7 +77,7 @@ class VistaTasks(Resource):
         print(os.path.dirname(__file__))
         print(output)
         file.save(output)
-        f = open(output, "rb")
+        f = open(MYDIR, "rb")
         sendFile4 = {"filerwerdsff": f}
         print(sendFile4)
        
@@ -87,7 +87,7 @@ class VistaTasks(Resource):
         outputF = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], dfile)
         sendFile = {"file": (filename, file.stream, file.mimetype)}
         
-        print(sendFile)
+        # print(sendFile)
         # cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False)   
         inputF  = URL_CONVERSOR+'/files/'
         # json = {
