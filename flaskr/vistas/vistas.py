@@ -114,7 +114,7 @@ class VistaTasks(Resource):
         task_schema = TaskSchema()
         taskId = task_schema.dump(new_task)['id']
         values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
-        sendFile2 = {"file": file}
+        sendFile2 = {"file": (filename, file.stream, file.mimetype)}
         content = requests.post(URL_CONVERSOR+'/files',files=sendFile2, data=values,verify=False)
         print(content)  
         return "Task converted", 200  
