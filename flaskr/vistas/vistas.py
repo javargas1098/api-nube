@@ -81,7 +81,7 @@ class VistaTasks(Resource):
                                     0] + str(uuidSelected), str(format))  # Build file name
         outputF = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], dfile)
         sendFile = {"file": (filename, file.stream, file.mimetype)}
-        # sendFile = {"file": file}
+        
         print(sendFile)
         cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False)   
         inputF  = URL_CONVERSOR+'/files/'
@@ -106,7 +106,8 @@ class VistaTasks(Resource):
         task_schema = TaskSchema()
         taskId = task_schema.dump(new_task)['id']
         values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
-        content = requests.post(URL_CONVERSOR+'/files',files=sendFile, data=values,verify=False)
+        sendFile2 = {"file": file}
+        content = requests.post(URL_CONVERSOR+'/files',files=sendFile2, data=values,verify=False)
         print(content)  
         return "Task converted", 200  
 
