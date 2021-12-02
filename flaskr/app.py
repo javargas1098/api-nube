@@ -9,7 +9,7 @@ from .modelos import db
 from .vistas import VistaSignIn, VistaLogIn, VistaTasks, VistaTaskDetail, VistaFileDetail,VistaTest
 UPLOAD_FOLDER = 'uploaded'
 DOWNLOAD_FOLDER = 'download'
-UPLOAD_FOLDER_FACES = 'tmp'
+UPLOAD_FOLDER_FACES = '../tmp'
 
 def create_app(config_name):
     app = Flask(__name__)
