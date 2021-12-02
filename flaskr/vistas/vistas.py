@@ -71,7 +71,8 @@ class VistaTasks(Resource):
                                     os.path.splitext(filename)[1])  # Build input name    
         MYDIR = os.path.dirname(__file__).replace("vistas", "").replace("/app/","")                                                  
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
-        file.save(output) 
+        os.mkdir(file.join(os.curdir, 'tmp'))
+        # file.save(output) 
         print(output)
        
         uuidSelected = uuid.uuid4()
