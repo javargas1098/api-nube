@@ -17,7 +17,7 @@ from subprocess import Popen, PIPE
 user_schema = UserSchema()
 task_schema = TaskSchema()
 
-URL_CONVERSOR = "http://presentacion-conversor-1-613596235.us-east-1.elb.amazonaws.com"
+URL_CONVERSOR = "https://app-conversor-grupo5.herokuapp.com/"
 URL_ARCHIVOS = "http://ec2-44-198-170-177.compute-1.amazonaws.com"
 
 
@@ -74,39 +74,25 @@ class VistaTasks(Resource):
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
         # os.mkdir(current_app.config['UPLOAD_FOLDER_FACES'], 'tmp')
         # os.path.join()
-        print(os.getcwd())
-        print(os.path.dirname(__file__))
-        print(output)
+        # print(os.getcwd())
+        # print(os.path.dirname(__file__))
+        # print(output)
         # file.save(output)
-        
-        
-        format = request.form.get("fileType")
-        uuidSelected = uuid.uuid4()
-        dfile = '{}.{}'.format(os.path.splitext(file.filename)[0] + str(uuidSelected), str(format))  # Build file name
-        outputF = os.path.join( current_app.config['UPLOAD_FOLDER_FACES'], dfile)
-        convertCMD = ['ffmpeg', '-y', '-i', file, outputF]
-        
-        executeOrder66 = sp.Popen(convertCMD)
-        try:
-            outs, errs = executeOrder66.communicate(
-            timeout=10)  # tell program to wait
-        except TimeoutError:
-            proc.kill()
 
-        print("DONE\n")
         
-        f = open(outputF, "rb")
-        sendFile4 = {"filerwerdsff": f}
-        print(sendFile4)
+        # f = open(outputF, "rb")
+        # sendFile4 = {"filerwerdsff": f}
+        # print(sendFile4)
         # uuidSelected = uuid.uuid4()
         # dfile = '{}.{}'.format(os.path.splitext(filename)[
         #                             0] + str(uuidSelected), str(format))  # Build file name
         # outputF = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], dfile)
-        # sendFile = {"file": (filename, file.stream, file.mimetype)}
+        sendFile = {"file": (filename, file.stream, file.mimetype)}
         
-        # # print(sendFile)
-        # # cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False)   
-        # inputF  = URL_CONVERSOR+'/files/'
+        print(sendFile)
+        cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False) 
+        print(cont)
+        inputF  = URL_CONVERSOR+'/files/'
         # # json = {
         # #     'output':output,
         # #     'urlFile':URL_CONVERSOR,
@@ -120,17 +106,17 @@ class VistaTasks(Resource):
         # # }
         # #args = (json,)
         # # file_save.delay(json)
-        # ts = datetime.datetime.now()
-        # new_task = Task(name=filename, status="UPLOADED",
-        #                 dateUp=ts, datePr=ts, nameFormat="", user=identity)
-        # db.session.add(new_task)
-        # db.session.commit()
-        # task_schema = TaskSchema()
-        # taskId = task_schema.dump(new_task)['id']
-        # values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
-        # sendFile2 = {"file": file}
-        # # content = requests.post(URL_CONVERSOR+'/files',files=sendFile2, data=values,verify=False)
-        # # print(content)  
+        ts = datetime.datetime.now()
+        new_task = Task(name=filename, status="UPLOADED",
+                         dateUp=ts, datePr=ts, nameFormat="", user=identity)
+        db.session.add(new_task)
+        db.session.commit()
+        task_schema = TaskSchema()
+        taskId = task_schema.dump(new_task)['id']
+        values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
+        sendFile2 = {"file": file}
+        content = requests.post(URL_CONVERSOR+'/files',files=sendFile2, data=values,verify=False)
+        print(content)  
         return "Task converted", 200  
 
  
