@@ -73,11 +73,12 @@ class VistaTasks(Resource):
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
         # os.mkdir(current_app.config['UPLOAD_FOLDER_FACES'], 'tmp')
         # os.path.join()
+        print(os.getcwd())
         print(os.path.dirname(__file__))
         print(output)
-        print(file.save(output) )
+        file.save(output)
         f = open(current_app.config['UPLOAD_FOLDER_FACES']+filename, "r")
-        print(f)
+        print("fileeeeee",f)
        
         uuidSelected = uuid.uuid4()
         dfile = '{}.{}'.format(os.path.splitext(filename)[
