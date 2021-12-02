@@ -17,7 +17,7 @@ from subprocess import Popen, PIPE
 user_schema = UserSchema()
 task_schema = TaskSchema()
 
-URL_CONVERSOR = "https://app-conversor-grupo5.herokuapp.com/"
+URL_CONVERSOR = "https://app-conversor-grupo5.herokuapp.com"
 URL_ARCHIVOS = "http://ec2-44-198-170-177.compute-1.amazonaws.com"
 
 
