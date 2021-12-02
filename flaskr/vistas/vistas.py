@@ -77,7 +77,7 @@ class VistaTasks(Resource):
         print(os.path.dirname(__file__))
         print(output)
         file.save(output)
-        f = open(current_app.config['UPLOAD_FOLDER_FACES']+filename, "rb")
+        f = open(output, "rb")
         sendFile4 = {"file": f}
         print(sendFile4)
        
