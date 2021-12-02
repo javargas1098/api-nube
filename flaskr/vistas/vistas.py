@@ -71,7 +71,7 @@ class VistaTasks(Resource):
                                     os.path.splitext(filename)[1])  # Build input name    
         MYDIR = os.path.dirname(__file__).replace("vistas", "").replace("/app/","")                                                  
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
-        m=os.mkdir(os.curdir, 'tmp')
+        m=os.mkdir(current_app.config['UPLOAD_FOLDER_FACES'], 'tmp')
         print(m)
         # os.path.join()
         # file.save(output) 
