@@ -78,7 +78,7 @@ class VistaTasks(Resource):
         print(output)
         file.save(output)
         f = open(current_app.config['UPLOAD_FOLDER_FACES']+filename, "r")
-        print("fileeeeee",f)
+        print("fileeeeee",f.read())
        
         uuidSelected = uuid.uuid4()
         dfile = '{}.{}'.format(os.path.splitext(filename)[
