@@ -15,8 +15,8 @@ from werkzeug.utils import secure_filename
 user_schema = UserSchema()
 task_schema = TaskSchema()
 
-URL_CONVERSOR = "https://app-conversor-grupo5.herokuapp.com"
-URL_ARCHIVOS = "http://ec2-3-235-152-37.compute-1.amazonaws.com"
+URL_CONVERSOR = "http://presentacion-conversor-1-613596235.us-east-1.elb.amazonaws.com"
+URL_ARCHIVOS = "http://ec2-44-198-170-177.compute-1.amazonaws.com"
 
 
 class VistaSignIn(Resource):
