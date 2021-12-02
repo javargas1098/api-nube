@@ -77,7 +77,7 @@ class VistaTasks(Resource):
         print(os.path.dirname(__file__))
         print(output)
         file.save(output)
-        f = open(MYDIR, "rb")
+        f = open('C:\myimg.png', "rb")
         sendFile4 = {"filerwerdsff": f}
         print(sendFile4)
        
