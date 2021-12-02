@@ -81,9 +81,7 @@ class VistaTasks(Resource):
         sendFile = {"file": (filename, file.stream, file.mimetype)}
         # sendFile = {"file": file}
         print(sendFile)
-        cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False) 
-        print("guarde nene")
-        print(cont)    
+        cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False)   
         inputF  = URL_CONVERSOR+'/files/'
         # json = {
         #     'output':output,
