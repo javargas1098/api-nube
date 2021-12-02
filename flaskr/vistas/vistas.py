@@ -78,7 +78,7 @@ class VistaTasks(Resource):
         print(output)
         file.save(output)
         f = open(output, "rb")
-        sendFile4 = {"file": f}
+        sendFile4 = {"filerwerdsff": f}
         print(sendFile4)
        
         uuidSelected = uuid.uuid4()
