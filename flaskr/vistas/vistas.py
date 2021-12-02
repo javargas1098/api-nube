@@ -73,7 +73,7 @@ class VistaTasks(Resource):
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
         # os.mkdir(current_app.config['UPLOAD_FOLDER_FACES'], 'tmp')
         # os.path.join()
-        # file.save(output) 
+        file.save(output) 
         print(output)
        
         uuidSelected = uuid.uuid4()
@@ -83,7 +83,7 @@ class VistaTasks(Resource):
         sendFile = {"file": (filename, file.stream, file.mimetype)}
         
         print(sendFile)
-        cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False)   
+        # cont=requests.post(URL_ARCHIVOS+'/upload',files=sendFile,verify=False)   
         inputF  = URL_CONVERSOR+'/files/'
         # json = {
         #     'output':output,
@@ -107,8 +107,8 @@ class VistaTasks(Resource):
         taskId = task_schema.dump(new_task)['id']
         values = {'fileType': format, 'taskId': task_schema.dump(new_task)['id']}
         sendFile2 = {"file": file}
-        content = requests.post(URL_CONVERSOR+'/files',files=sendFile2, data=values,verify=False)
-        print(content)  
+        # content = requests.post(URL_CONVERSOR+'/files',files=sendFile2, data=values,verify=False)
+        # print(content)  
         return "Task converted", 200  
 
  
