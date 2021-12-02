@@ -73,7 +73,7 @@ class VistaTasks(Resource):
         output = os.path.join(current_app.config['UPLOAD_FOLDER_FACES'], filename)
         # os.mkdir(current_app.config['UPLOAD_FOLDER_FACES'], 'tmp')
         # os.path.join()
-        file.save(output) 
+        # file.save(output) 
         print(output)
        
         uuidSelected = uuid.uuid4()
